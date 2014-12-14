@@ -1,28 +1,111 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+#include<iostream>
+using namespace std;
+struct Node
+{
+	int data;
+	Node* next;
+};
+struct Node* head;
+void Insert(int x)
+{
+	if(head!=NULL)
+	{
+		Node* temp1=head;
+		Node* temp= new Node;
+		temp->data=x;
+		temp->next=NULL;
+		while(temp1->next!=NULL)
+		{
+			temp1=temp1->next;
+		}
+		
+		temp1->next=temp;
+	}
+	else
+	{
+		
+		 head=new Node;
+		head->data=x;
+		head->next=NULL;
+	}
+}
+void Print()
+{
+	Node* temp=head;
+	while(temp!=NULL)
+	{
+		cout<<temp->data<<endl;
+		temp=temp->next;
+	}}
+void InsertatDesiredlocation(int a,int b)
+{
+	Node* temp1=head;
+	Node* join;
+	Node* temp=new Node;
+	temp->data=a;
+	temp->next=NULL;
+	while(temp1->data!=b)
+	{
+		temp1=temp1->next;
+		
+	}
+	join=temp1->next;
+	temp1->next=temp;
+	temp->next=join;
+	
+}
+void DeleteFromList(int c)
+{
+	Node* temp1=head;
+		Node* join;
+	while(temp1->next->data!=c)
+	{
+		temp1=temp1->next;
+	}
+	join=temp1->next;
+	temp1->next=join->next;
+	delete join;
+	
+}
+void InsertinFront(int d)
+{
+	//Node* temp1=head;
+	Node* rish;
+	Node* temp= new Node;
+	temp->data=d;
+	rish=head;
+	temp->next=rish;
+	head=temp;
+	//temp1->next=temp;
+}
+	
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+int main()
+{
+	int n,value,i,a,b,c,val;
+	head=NULL;
+	cout<<"Enter how many values you have to enter\n";
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>value;
+		Insert(value);
+	}
+	Print();
+	cout<<"Enter the element you want to insert in list\n";
+	cin>>a;
+	Print();
+	cout<<"After which element you want to insert\n";
+	cin>>b;
+	InsertatDesiredlocation(a,b);
+	Print();
+	cout<<"Which element you want to delete?\n";
+	cin>>c;
+	DeleteFromList(c);
+	Print();
+	cout<<"Insert elements in the beginning, enter   number \n";
+	cin>>val;
+	InsertinFront(val);
+	Print();
+	return 0;
+}
